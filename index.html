@@ -348,6 +348,107 @@ section{
   .ch-grid,.popes-grid{grid-template-columns:1fr 1fr;height:auto}
   .fg-big{grid-row:auto}
 }
+
+/* ══ MOBILE ══ */
+@media(max-width:600px){
+  section{padding:70px 5vw 80px!important;min-height:100vh}
+
+  /* Cover */
+  .cvr-content{padding-left:12px}
+  .cvr-pills{flex-wrap:wrap;gap:6px;margin-bottom:20px}
+  .pill{font-size:9px;padding:4px 10px}
+  .cvr-title{font-size:clamp(36px,10vw,52px)!important}
+  .cvr-sub{font-size:13px;max-width:100%}
+  .cvr-meta{flex-wrap:wrap;gap:12px}
+  .cvr-divider{display:none}
+  .cvr-meta-item{font-size:10px}
+  .cvr-meta-item strong{font-size:12px}
+  .cvr-scroll{display:none}
+
+  /* Logo bar */
+  .logo-bar{gap:20px;height:50px}
+  .logo-bar img{height:20px}
+
+  /* Who we are */
+  .wwa-layout{grid-template-columns:1fr!important;gap:28px}
+  .wwa-title{font-size:28px}
+  .wwa-stats{gap:20px}
+  .stat-n{font-size:36px}
+  .wwa-right{gap:10px}
+  .brand-card{padding:14px 16px}
+  .bc-desc{display:none}
+
+  /* Slide headers */
+  .slide-header{flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:16px}
+  .slide-logo{height:28px}
+  .slide-title{font-size:clamp(24px,7vw,36px)}
+
+  /* Flow grid - single column stacked */
+  .flow-grid{grid-template-columns:1fr!important;height:auto!important}
+  .fg-big{grid-row:auto!important}
+  .fg-cell,.ch-cell,.pg-cell{height:52vw!important;min-height:160px}
+
+  /* Photo grids - 2 col on mobile */
+  [style*="grid-template-columns:2fr 1fr 1fr"]{display:grid!important;grid-template-columns:1fr 1fr!important;height:auto!important}
+  [style*="grid-template-columns:1fr 1fr 1fr 1fr"]{display:grid!important;grid-template-columns:1fr 1fr!important;height:auto!important}
+  [style*="grid-template-columns:1fr 1fr 1fr"]{display:grid!important;grid-template-columns:1fr 1fr!important;height:auto!important}
+  [style*="grid-template-columns:1.4fr 1fr 1fr"]{display:grid!important;grid-template-columns:1fr 1fr!important;height:auto!important}
+  [style*="grid-template-columns:2fr 1fr"]{display:grid!important;grid-template-columns:1fr!important;height:auto!important}
+
+  /* Info strips below photo grids */
+  [style*="display:grid;grid-template-columns:auto 1fr"]{display:flex!important;flex-direction:column!important;gap:12px!important}
+  .fi-tag,.ch-tag,.popes-tag{font-size:10px;padding:5px 12px}
+  [style*="border:1px solid rgba(201,168,76"],[style*="border:1px solid rgba(139,26,26"],[style*="border:1px solid rgba(125,60,26"]{padding:12px 14px!important}
+  [style*="border:1px solid rgba(201,168,76"] p,[style*="border:1px solid rgba(139,26,26"] p,[style*="border:1px solid rgba(125,60,26"] p{font-size:11.5px!important}
+
+  /* Offerings */
+  .off-header{margin-bottom:28px}
+  .off-title{font-size:clamp(26px,7vw,38px)!important}
+  .off-grid{grid-template-columns:1fr!important;gap:12px}
+  .off-card{padding:20px 18px}
+
+  /* Audience */
+  .aud-layout{grid-template-columns:1fr!important;gap:24px}
+  .aud-title{font-size:clamp(26px,7vw,36px)!important}
+  .aud-body{max-width:100%}
+  .aud-demos{grid-template-columns:1fr 1fr;gap:8px}
+  .demo-pct{font-size:26px}
+  .reach-card{padding:14px 16px;gap:14px}
+  .rc-num{font-size:28px;min-width:70px}
+
+  /* Deliverables */
+  .del-title{font-size:clamp(26px,7vw,36px)!important}
+  .del-grid{grid-template-columns:1fr 1fr!important;gap:10px}
+  .del-card{padding:18px 14px}
+  .del-num{font-size:28px}
+
+  /* Partnership slide */
+  [style*="display:grid;grid-template-columns:1fr 1.1fr"]{display:flex!important;flex-direction:column!important;gap:24px!important;height:auto!important}
+  [style*="display:grid;grid-template-columns:1fr 1fr;gap:12px"]{grid-template-columns:1fr 1fr!important}
+  table{font-size:11px!important}
+  table th,table td{padding:7px 8px!important}
+
+  /* Closing */
+  .cl-title{font-size:clamp(36px,10vw,60px)!important}
+  .cl-sub{font-size:13px;max-width:100%}
+  .cl-contact{flex-direction:column;gap:16px;align-items:flex-start}
+  .cl-logos{gap:24px;flex-wrap:wrap;justify-content:center}
+  .cl-logos img{height:24px}
+  .cl-ring,.cl-ring2{display:none}
+
+  /* Nav dots - hide on mobile, too small to tap usefully */
+  .dots{display:none}
+
+  /* Scroll snap still works but with touch momentum */
+  html{scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+}
+
+@media(max-width:400px){
+  section{padding:60px 4vw 75px!important}
+  .cvr-title{font-size:32px!important}
+  .del-grid{grid-template-columns:1fr!important}
+  .aud-demos{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
