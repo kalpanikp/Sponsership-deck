@@ -245,6 +245,13 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
     height: 44vw!important;
     min-height: 130px!important;
   }
+
+  /* Partnership slide mobile */
+  #s9 div[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns:1fr 1fr!important; }
+  .s9-bottom { grid-template-columns:1fr!important; }
+  #s9 table td, #s9 table th { padding:9px 8px!important; font-size:11px!important; }
+  #s9 table tr td:first-child, #s9 table tr th:first-child { padding-left:10px!important; }
+  #s9 table tr td:last-child, #s9 table tr th:last-child { padding-right:10px!important; }
 @media(max-width:400px){
   section{padding:56px 12px 68px!important}
   .del-grid{grid-template-columns:1fr!important}
@@ -506,45 +513,99 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
 </section>
 
 <!-- S9 PARTNERSHIP -->
-<section id="s9">
+<section id="s9" style="min-height:auto;padding-bottom:100px">
   <div class="del-bg"></div>
-  <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start;position:relative;z-index:2;height:100%">
-    <div style="display:flex;flex-direction:column;justify-content:center;height:100%">
-      <p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Partnership Proposal</p>
-      <div class="section-line"></div>
-      <h2 style="font-family:var(--serif);font-size:clamp(28px,3.2vw,44px);font-weight:300;line-height:1.1;margin-bottom:20px">Built for Brands That<br><em style="font-style:italic;color:var(--gold-light)">Want to Be Remembered</em></h2>
-      <p style="font-size:13.5px;line-height:1.75;color:var(--muted);margin-bottom:24px;max-width:440px">We've been steadily building a space at the intersection of music, community, and a strong repeat audience — the kind that doesn't just show up once, but keeps coming back. Our programming is consistent, our footfall is reliable, and our crowd genuinely engages with what they consume.</p>
-      <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:28px;max-width:440px">For the upcoming quarter, we're looking to work closely with a <strong style="color:var(--text)">select set of alcohol partners</strong> who want to be <em style="color:var(--gold-light)">seen, experienced, and remembered</em>, not just placed.</p>
+  <div style="position:relative;z-index:2;max-width:900px;margin:0 auto">
+
+    <!-- Header -->
+    <p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Partnership Proposal</p>
+    <div class="section-line"></div>
+    <h2 style="font-family:var(--serif);font-size:clamp(26px,3.5vw,44px);font-weight:300;line-height:1.1;margin-bottom:16px">Built for Brands That <em style="font-style:italic;color:var(--gold-light)">Want to Be Remembered</em></h2>
+    <p style="font-size:13.5px;line-height:1.75;color:var(--muted);margin-bottom:12px;max-width:640px">We've been steadily building a space at the intersection of music, community, and a strong repeat audience — the kind that doesn't just show up once, but keeps coming back.</p>
+    <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:28px;max-width:640px">For the upcoming quarter, we're looking to work closely with a <strong style="color:var(--text)">select set of alcohol partners</strong> who want to be <em style="color:var(--gold-light)">seen, experienced, and remembered</em> — not just placed.</p>
+
+    <!-- 4 benefit cards — 2x2 on desktop, 2x2 on mobile -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px">
+      <div style="padding:16px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)"><div style="font-size:20px;margin-bottom:8px">👁</div><div style="font-size:13px;font-weight:600;margin-bottom:4px">Real Visibility</div><div style="font-size:11px;color:var(--muted);line-height:1.5">Consistent footfall, not one-off spikes</div></div>
+      <div style="padding:16px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)"><div style="font-size:20px;margin-bottom:8px">🍸</div><div style="font-size:13px;font-weight:600;margin-bottom:4px">Direct Consumption</div><div style="font-size:11px;color:var(--muted);line-height:1.5">Menu integration &amp; signature serves</div></div>
+      <div style="padding:16px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)"><div style="font-size:20px;margin-bottom:8px">📱</div><div style="font-size:13px;font-weight:600;margin-bottom:4px">Social Presence</div><div style="font-size:11px;color:var(--muted);line-height:1.5">Across our content &amp; event calendar</div></div>
+      <div style="padding:16px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)"><div style="font-size:20px;margin-bottom:8px">✦</div><div style="font-size:13px;font-weight:600;margin-bottom:4px">Premium Association</div><div style="font-size:11px;color:var(--muted);line-height:1.5">Culturally aware, high-spend audience</div></div>
+    </div>
+
+    <!-- Budget table — PROMINENT -->
+    <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Investment Overview · May–Aug 2026</p>
+    <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(201,168,76,0.25);margin-bottom:24px">
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr style="background:rgba(201,168,76,0.12)">
+            <th style="padding:12px 16px;text-align:left;color:var(--gold);font-weight:600;font-size:12px;letter-spacing:.05em">Month</th>
+            <th style="padding:12px 12px;text-align:right;color:#7ec8e3;font-size:12px;font-weight:600">Flow</th>
+            <th style="padding:12px 12px;text-align:right;color:#e88;font-size:12px;font-weight:600">Chatter</th>
+            <th style="padding:12px 12px;text-align:right;color:#d4a574;font-size:12px;font-weight:600">Popes'</th>
+            <th style="padding:12px 16px;text-align:right;color:var(--gold);font-size:12px;font-weight:700">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid rgba(255,255,255,0.06)">
+            <td style="padding:11px 16px;color:var(--muted);font-size:13px">May 2026</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹2.5L</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹1L</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹2L</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--gold);font-weight:600;font-size:13px">₹5.5L</td>
+          </tr>
+          <tr style="border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
+            <td style="padding:11px 16px;color:var(--muted);font-size:13px">June 2026</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹2.5L</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹1L</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹2L</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--gold);font-weight:600;font-size:13px">₹5.5L</td>
+          </tr>
+          <tr style="border-top:1px solid rgba(255,255,255,0.06)">
+            <td style="padding:11px 16px;color:var(--muted);font-size:13px">July 2026</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹3L</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹1L</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹2L</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--gold);font-weight:600;font-size:13px">₹6L</td>
+          </tr>
+          <tr style="border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)">
+            <td style="padding:11px 16px;color:var(--muted);font-size:13px">August 2026</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹3L</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹1L</td>
+            <td style="padding:11px 12px;text-align:right;color:var(--text);font-size:13px">₹2L</td>
+            <td style="padding:11px 16px;text-align:right;color:var(--gold);font-weight:600;font-size:13px">₹6L</td>
+          </tr>
+          <tr style="border-top:2px solid rgba(201,168,76,0.35);background:rgba(201,168,76,0.08)">
+            <td style="padding:13px 16px;font-weight:700;color:var(--text);font-size:14px">Total</td>
+            <td style="padding:13px 12px;text-align:right;color:var(--text);font-weight:600;font-size:14px">₹11L</td>
+            <td style="padding:13px 12px;text-align:right;color:var(--text);font-weight:600;font-size:14px">₹4L</td>
+            <td style="padding:13px 12px;text-align:right;color:var(--text);font-weight:600;font-size:14px">₹8L</td>
+            <td style="padding:13px 16px;text-align:right;color:var(--gold);font-weight:700;font-size:16px">₹23L</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- What we need + closing note — side by side on desktop, stacked on mobile -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start" class="s9-bottom">
       <div style="border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:20px 22px;background:rgba(201,168,76,0.04)">
         <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">What We Need From You</p>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted)"><span style="color:var(--gold);margin-top:1px">→</span>Monthly support of <strong style="color:var(--text)">₹2–3L</strong> on a quarterly lock-in</div>
-          <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted)"><span style="color:var(--gold);margin-top:1px">→</span>Stock support to back menu presence &amp; high-footfall nights</div>
-          <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted)"><span style="color:var(--gold);margin-top:1px">→</span>Basic cross-promotion where relevant</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--muted)"><span style="color:var(--gold);flex-shrink:0">→</span>Monthly support of <strong style="color:var(--text)">&nbsp;₹2–3L</strong>&nbsp;on a quarterly lock-in</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--muted)"><span style="color:var(--gold);flex-shrink:0">→</span>Stock support to back menu presence &amp; high-footfall nights</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--muted)"><span style="color:var(--gold);flex-shrink:0">→</span>Basic cross-promotion where relevant</div>
+        </div>
+      </div>
+      <div style="border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px 22px;background:rgba(255,255,255,0.02)">
+        <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Our Commitment</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--muted)"><span style="color:var(--gold);flex-shrink:0">✓</span>Strong on-ground presence via menu placements &amp; brand-led serves</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--muted)"><span style="color:var(--gold);flex-shrink:0">✓</span>Integration across weekly programming &amp; key nights</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--muted)"><span style="color:var(--gold);flex-shrink:0">✓</span>Consistent social media visibility before, during &amp; after events</div>
         </div>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:20px;justify-content:center;height:100%">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div style="padding:16px 18px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)"><div style="font-size:18px;margin-bottom:8px">👁</div><div style="font-size:13px;font-weight:600;margin-bottom:5px">Real Visibility</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Consistent footfall, not one-off spikes</div></div>
-        <div style="padding:16px 18px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)"><div style="font-size:18px;margin-bottom:8px">🍸</div><div style="font-size:13px;font-weight:600;margin-bottom:5px">Direct Consumption</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Menu integration &amp; signature serves</div></div>
-        <div style="padding:16px 18px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)"><div style="font-size:18px;margin-bottom:8px">📱</div><div style="font-size:13px;font-weight:600;margin-bottom:5px">Social Presence</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Across our content &amp; event calendar</div></div>
-        <div style="padding:16px 18px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)"><div style="font-size:18px;margin-bottom:8px">✦</div><div style="font-size:13px;font-weight:600;margin-bottom:5px">Premium Association</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Culturally aware, high-spend audience</div></div>
-      </div>
-      <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(201,168,76,0.2)">
-        <table style="width:100%;border-collapse:collapse;font-size:12px">
-          <thead><tr style="background:rgba(201,168,76,0.1)"><th style="padding:10px 14px;text-align:left;color:var(--gold);font-weight:600;font-size:11px">Month</th><th style="padding:10px 10px;text-align:right;color:#7ec8e3;font-size:11px">Flow</th><th style="padding:10px 10px;text-align:right;color:#e88;font-size:11px">Chatter</th><th style="padding:10px 10px;text-align:right;color:#d4a574;font-size:11px">Popes'</th><th style="padding:10px 14px;text-align:right;color:var(--gold);font-size:11px;font-weight:600">Total</th></tr></thead>
-          <tbody>
-            <tr style="border-top:1px solid rgba(255,255,255,0.05)"><td style="padding:9px 14px;color:var(--muted)">May 2026</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹2.5L</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹1L</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹2L</td><td style="padding:9px 14px;text-align:right;color:var(--gold);font-weight:600">₹5.5L</td></tr>
-            <tr style="border-top:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.015)"><td style="padding:9px 14px;color:var(--muted)">June 2026</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹2.5L</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹1L</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹2L</td><td style="padding:9px 14px;text-align:right;color:var(--gold);font-weight:600">₹5.5L</td></tr>
-            <tr style="border-top:1px solid rgba(255,255,255,0.05)"><td style="padding:9px 14px;color:var(--muted)">July 2026</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹3L</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹1L</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹2L</td><td style="padding:9px 14px;text-align:right;color:var(--gold);font-weight:600">₹6L</td></tr>
-            <tr style="border-top:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.015)"><td style="padding:9px 14px;color:var(--muted)">August 2026</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹3L</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹1L</td><td style="padding:9px 10px;text-align:right;color:var(--text)">₹2L</td><td style="padding:9px 14px;text-align:right;color:var(--gold);font-weight:600">₹6L</td></tr>
-            <tr style="border-top:2px solid rgba(201,168,76,0.3);background:rgba(201,168,76,0.06)"><td style="padding:10px 14px;font-weight:700;color:var(--text)">Total</td><td style="padding:10px 10px;text-align:right;color:var(--text);font-weight:600">₹11L</td><td style="padding:10px 10px;text-align:right;color:var(--text);font-weight:600">₹4L</td><td style="padding:10px 10px;text-align:right;color:var(--text);font-weight:600">₹8L</td><td style="padding:10px 14px;text-align:right;color:var(--gold);font-weight:700;font-size:14px">₹23L</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="font-size:11.5px;color:var(--muted);line-height:1.65;font-style:italic;opacity:.75">We're keeping partnerships tight so every brand gets its due attention and recall.</p>
-    </div>
+
+    <p style="font-size:11.5px;color:var(--muted);line-height:1.65;font-style:italic;opacity:.65;margin-top:20px;text-align:center">We're keeping partnerships tight so every brand gets its due attention and recall. Happy to connect and take it forward.</p>
   </div>
 </section>
 
