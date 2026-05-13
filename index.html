@@ -252,6 +252,9 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
   #s9 table td, #s9 table th { padding:9px 8px!important; font-size:11px!important; }
   #s9 table tr td:first-child, #s9 table tr th:first-child { padding-left:10px!important; }
   #s9 table tr td:last-child, #s9 table tr th:last-child { padding-right:10px!important; }
+
+  /* Brand detail cards on mobile */
+  .brand-detail-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
 @media(max-width:400px){
   section{padding:56px 12px 68px!important}
   .del-grid{grid-template-columns:1fr!important}
@@ -319,6 +322,92 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
 }
 /* Zoom icon on hover */
 .fg-cell:hover img,.ch-cell:hover img,.pg-cell:hover img{transform:scale(1.04)}
+
+/* ── BRAND MODAL ── */
+#brand-modal {
+  position:fixed;inset:0;z-index:9998;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0);
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease, background .3s ease;
+  padding:20px;
+}
+#brand-modal.open {
+  opacity:1;pointer-events:all;
+  background:rgba(0,0,0,0.88);
+}
+#brand-modal-inner {
+  background:var(--surface);
+  border-radius:16px;
+  border:1px solid rgba(201,168,76,0.2);
+  max-width:680px;width:100%;
+  max-height:88vh;overflow-y:auto;
+  transform:translateY(24px) scale(0.97);
+  transition:transform .35s cubic-bezier(0.34,1.2,0.64,1);
+  box-shadow:0 32px 80px rgba(0,0,0,0.6);
+  position:relative;
+}
+#brand-modal.open #brand-modal-inner {
+  transform:translateY(0) scale(1);
+}
+#bm-close {
+  position:absolute;top:16px;right:16px;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  color:#fff;font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:2;
+}
+#bm-close:hover{background:rgba(255,255,255,0.16)}
+#bm-header {
+  padding:28px 28px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+#bm-accent-line {
+  width:36px;height:3px;border-radius:2px;margin-bottom:14px;
+}
+#bm-name {
+  font-family:var(--serif);font-size:clamp(26px,4vw,36px);
+  font-weight:300;color:#fff;margin-bottom:6px;line-height:1.1;
+}
+#bm-loc {
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+#bm-desc {
+  font-size:14px;color:var(--muted);line-height:1.75;
+}
+#bm-body {
+  padding:20px 28px 28px;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+@media(max-width:500px){
+  #bm-body{grid-template-columns:1fr}
+  #brand-modal-inner{border-radius:12px}
+  #bm-header,#bm-body{padding-left:18px;padding-right:18px}
+}
+.bm-card {
+  padding:16px 18px;border-radius:10px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+}
+.bm-card-title {
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.bm-list {
+  list-style:none;display:flex;flex-direction:column;gap:7px;
+}
+.bm-list li {
+  font-size:12.5px;color:var(--muted);
+  padding-left:16px;position:relative;line-height:1.5;
+}
+.bm-list li span {position:absolute;left:0;color:var(--gold)}
+.brand-card[data-brand]:hover {
+  border-color:rgba(201,168,76,0.4)!important;
+  transform:translateX(4px);
+  transition:all .2s ease;
+}
 </style>
 </head>
 <body>
@@ -354,7 +443,7 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
     </div>
     <p class="cvr-eyebrow">Sponsorship Proposal · 2026</p>
     <h1 class="cvr-title">Where Delhi<br><em>Comes Alive</em></h1>
-    <p class="cvr-sub">Three distinct venues. One cultural movement. A partnership opportunity to reach New Delhi's most discerning audience through live music, curated events, and immersive hospitality.</p>
+    <p class="cvr-sub">Three distinct venues. Three loyal audiences. One opportunity to be seen, experienced, and remembered across Delhi-NCR's most vibrant hospitality destinations.</p>
     <div class="cvr-meta">
       <div class="cvr-meta-item"><strong>3</strong>Premium Venues</div>
       <div class="cvr-divider"></div>
@@ -375,8 +464,8 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
     <div class="wwa-left">
       <p class="eyebrow">About Us</p>
       <div class="section-line"></div>
-      <h2 class="wwa-title">Delhi's Most <strong>Beloved</strong> Hospitality Group</h2>
-      <p class="wwa-body">Founded by visionary restaurateur Swadeep Popli, the Flow Group operates three of Delhi-NCR's most celebrated venues. We create spaces where culture, craft, and community converge — drawing a loyal audience of urban professionals, creatives, and tastemakers.</p>
+      <h2 class="wwa-title">Three Venues.<br><strong>One Vision.</strong></h2>
+      <p class="wwa-body">Three of Delhi-NCR's most celebrated hospitality destinations — each with its own identity, crowd, and culture — united by a shared commitment to craft, community, and unforgettable experiences. Built by the same creative force behind some of the city's most talked-about venues.</p>
       <div class="wwa-stats">
         <div><div class="stat-n">3</div><div class="stat-l">Iconic Venues</div></div>
         <div><div class="stat-n">9K+</div><div class="stat-l">Sq Ft (Flow)</div></div>
@@ -384,20 +473,35 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
       </div>
     </div>
     <div class="wwa-right">
-      <div class="brand-card flow">
-        <div class="bc-name">Flow Brew &amp; Dine</div>
-        <div class="bc-loc">DLF Avenue Saket, New Delhi</div>
-        <div class="bc-desc">Award-winning 9,000 sq ft brew pub and live music venue. Times Nightlife Award '23. Rooftop, bar, indoor and outdoor seating.</div>
+      <div class="brand-card flow" data-brand="flow" role="button" tabindex="0" style="cursor:pointer">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div class="bc-name">Flow Brew &amp; Dine</div>
+            <div class="bc-loc">DLF Avenue Saket, New Delhi</div>
+            <div class="bc-desc">Award-winning 9,000 sq ft brew pub and live music venue. Times Nightlife Award '23. Rooftop, bar, indoor and outdoor seating.</div>
+          </div>
+          <div style="color:var(--gold);font-size:18px;opacity:.6;flex-shrink:0;margin-left:14px">↗</div>
+        </div>
       </div>
-      <div class="brand-card chatter">
-        <div class="bc-name">The Chatter House</div>
-        <div class="bc-loc">Khan Market &amp; Nehru Place, New Delhi</div>
-        <div class="bc-desc">Classic British pub meets modern Delhi. Known for its wood-panelled warmth, live sport screenings, quiz nights, and consistently packed weekends.</div>
+      <div class="brand-card chatter" data-brand="chatter" role="button" tabindex="0" style="cursor:pointer">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div class="bc-name">The Chatter House</div>
+            <div class="bc-loc">Khan Market &amp; Nehru Place, New Delhi</div>
+            <div class="bc-desc">Classic British pub meets modern Delhi. Known for its wood-panelled warmth, live sport screenings, quiz nights, and consistently packed weekends.</div>
+          </div>
+          <div style="color:var(--gold);font-size:18px;opacity:.6;flex-shrink:0;margin-left:14px">↗</div>
+        </div>
       </div>
-      <div class="brand-card popes">
-        <div class="bc-name">Popes' Southwest Cantina</div>
-        <div class="bc-loc">M3M Broadway, Sector 71, Gurugram</div>
-        <div class="bc-desc">2025's hottest new opening — a Mexican cantina with Southwest soul. Craft cocktails, NY-style pizza, live music and a rooftop terrace.</div>
+      <div class="brand-card popes" data-brand="popes" role="button" tabindex="0" style="cursor:pointer">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div class="bc-name">Popes' Southwest Cantina</div>
+            <div class="bc-loc">M3M Broadway, Sector 71, Gurugram</div>
+            <div class="bc-desc">2025's hottest new opening — a Mexican cantina with Southwest soul. Craft cocktails, NY-style pizza, live music and a rooftop terrace.</div>
+          </div>
+          <div style="color:var(--gold);font-size:18px;opacity:.6;flex-shrink:0;margin-left:14px">↗</div>
+        </div>
       </div>
     </div>
   </div>
@@ -423,12 +527,38 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
   <div style="display:grid;grid-template-columns:1fr;gap:6px;height:20vh;min-height:130px;border-radius:0 0 10px 10px;overflow:hidden;position:relative;z-index:2;margin-top:6px">
     <div class="fg-cell" id="flow-c3"></div>
   </div>
-  <div class="flow-info">
-    <span class="fi-tag">🏆 Times Nightlife Award '23</span>
-    <span class="fi-tag">📍 DLF Avenue Saket, New Delhi</span>
-    <span class="fi-tag">9,000 sq ft · Rooftop + Indoor</span>
-    <span class="fi-tag">Live Music Every Weekend</span>
-    <span class="fi-tag">@flowdelhi</span>
+  <div style="margin-top:20px;position:relative;z-index:2">
+    <div class="flow-info" style="margin-bottom:18px">
+      <span class="fi-tag">🏆 Times Nightlife Award '23</span>
+      <span class="fi-tag">📍 DLF Avenue Saket, New Delhi</span>
+      <span class="fi-tag">9,000 sq ft · Rooftop + Indoor</span>
+      <span class="fi-tag">Live Music Every Weekend</span>
+      <span class="fi-tag">@flowdelhi</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px" class="brand-detail-grid">
+      <div style="padding:18px 20px;border-radius:10px;background:rgba(26,82,118,0.1);border:1px solid rgba(26,82,118,0.25)">
+        <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#7ec8e3;margin-bottom:10px">The Venue</p>
+        <p style="font-size:12.5px;color:var(--muted);line-height:1.7">A 9,000 sq ft brew pub and live music destination at DLF Avenue Saket. Spanning a lush rooftop, a vibrant indoor bar, and an open-air outdoor section — Flow is where Delhi's urban crowd comes to unwind, celebrate, and discover great music. Winner of the Times Nightlife Award 2023.</p>
+      </div>
+      <div style="padding:18px 20px;border-radius:10px;background:rgba(26,82,118,0.1);border:1px solid rgba(26,82,118,0.25)">
+        <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#7ec8e3;margin-bottom:10px">What Happens Here</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Live bands &amp; acoustic acts every Fri &amp; Sat</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Fire performances &amp; themed event nights</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Brand activations, pop-ups &amp; private buyouts</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Craft beer launches &amp; seasonal menus</li>
+        </ul>
+      </div>
+      <div style="padding:18px 20px;border-radius:10px;background:rgba(26,82,118,0.1);border:1px solid rgba(26,82,118,0.25)">
+        <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#7ec8e3;margin-bottom:10px">The Audience</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Urban professionals, 24–38, South Delhi crowd</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>1,500+ covers on live music weekends</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Avg spend ₹2,000+ per cover</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>40K+ Instagram followers, high organic reach</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -461,12 +591,38 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
   <div style="display:grid;grid-template-columns:1fr;gap:6px;height:20vh;min-height:130px;border-radius:0 0 10px 10px;overflow:hidden;position:relative;z-index:2;margin-top:6px">
     <div class="ch-cell" id="ch-r4a"></div>
   </div>
-  <div class="ch-info" style="margin-top:14px">
-    <span class="ch-tag">📍 Khan Market &amp; Nehru Place</span>
-    <span class="ch-tag">British Pub Classics</span>
-    <span class="ch-tag">Live Sport · Quiz Nights</span>
-    <span class="ch-tag">Est. 2013</span>
-    <span class="ch-tag">@thechatterhouse</span>
+  <div style="margin-top:20px;position:relative;z-index:2">
+    <div class="ch-info" style="margin-bottom:18px">
+      <span class="ch-tag">📍 Khan Market &amp; Nehru Place</span>
+      <span class="ch-tag">British Pub Classics</span>
+      <span class="ch-tag">Live Sport · Quiz Nights</span>
+      <span class="ch-tag">Est. 2013</span>
+      <span class="ch-tag">@thechatterhouse</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px" class="brand-detail-grid">
+      <div style="padding:18px 20px;border-radius:10px;background:rgba(139,26,26,0.1);border:1px solid rgba(139,26,26,0.28)">
+        <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#e88;margin-bottom:10px">The Venue</p>
+        <p style="font-size:12.5px;color:var(--muted);line-height:1.7">Delhi's most beloved pub institution since 2013 — two iconic locations in Khan Market and Nehru Place. Famous for its warm brick interiors, signature chandelier halls, craft beer taps, and a fiercely loyal crowd that has been returning for over a decade.</p>
+      </div>
+      <div style="padding:18px 20px;border-radius:10px;background:rgba(139,26,26,0.1);border:1px solid rgba(139,26,26,0.28)">
+        <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#e88;margin-bottom:10px">What Happens Here</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Live music Thu, Fri &amp; Sat — bands &amp; solo acts</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Weekly pub quiz nights with packed houses</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Live sport — UCL, Premier League, ICC screenings</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Karaoke nights, fashion pop-ups &amp; themed events</li>
+        </ul>
+      </div>
+      <div style="padding:18px 20px;border-radius:10px;background:rgba(139,26,26,0.1);border:1px solid rgba(139,26,26,0.28)">
+        <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#e88;margin-bottom:10px">The Audience</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Mixed 24–42 crowd — professionals &amp; sports fans</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Two prime locations covering Central Delhi</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Deep repeat visit culture — regulars every week</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>30K+ Instagram followers across both outlets</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -495,12 +651,38 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
     <div class="pg-cell" id="pg-r3c"></div>
     <div class="pg-cell" id="pg-r3d"></div>
   </div>
-  <div class="popes-info" style="margin-top:14px">
-    <span class="popes-tag">📍 M3M Broadway, Sector 71 Gurgaon</span>
-    <span class="popes-tag">NY-Style Pizza</span>
-    <span class="popes-tag">Tequila &amp; Mezcal Bar</span>
-    <span class="popes-tag">Launched 2025</span>
-    <span class="popes-tag">@popesindia</span>
+  <div style="margin-top:20px;position:relative;z-index:2">
+    <div class="popes-info" style="margin-bottom:18px">
+      <span class="popes-tag">📍 M3M Broadway, Sector 71 Gurgaon</span>
+      <span class="popes-tag">NY-Style Pizza</span>
+      <span class="popes-tag">Tequila &amp; Mezcal Bar</span>
+      <span class="popes-tag">Launched 2025</span>
+      <span class="popes-tag">@popesindia</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px" class="brand-detail-grid">
+      <div style="padding:18px 20px;border-radius:10px;background:rgba(125,60,26,0.12);border:1px solid rgba(125,60,26,0.3)">
+        <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#d4a574;margin-bottom:10px">The Venue</p>
+        <p style="font-size:12.5px;color:var(--muted);line-height:1.7">Gurugram's most anticipated opening of 2025 — Popes' Southwest Cantina brings Mexican cantina soul to M3M Broadway, Sector 71. Rustic roadhouse vibes, handcrafted décor, warm Edison lighting, and a menu built around NY-style pizza, slow-cooked meats, and house-made salsas.</p>
+      </div>
+      <div style="padding:18px 20px;border-radius:10px;background:rgba(125,60,26,0.12);border:1px solid rgba(125,60,26,0.3)">
+        <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#d4a574;margin-bottom:10px">What Happens Here</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Weekend live music — bands, DJs &amp; acoustic sets</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Tequila &amp; mezcal tastings, cocktail masterclasses</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Brand launch events &amp; curated dining experiences</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">→</span>Sunday brunches &amp; private dining buyouts</li>
+        </ul>
+      </div>
+      <div style="padding:18px 20px;border-radius:10px;background:rgba(125,60,26,0.12);border:1px solid rgba(125,60,26,0.3)">
+        <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#d4a574;margin-bottom:10px">The Audience</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Gurugram's premium dining &amp; nightlife crowd</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Corporate professionals from Cyber City &amp; Golf Course Rd</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>Strong weekend footfall from Day 1 of launch</li>
+          <li style="font-size:12.5px;color:var(--muted);padding-left:15px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">✦</span>High-spend demographic — avg cover ₹2,500+</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1233,6 +1415,201 @@ document.addEventListener("DOMContentLoaded", function(){
   window.addEventListener("load", function(){ setTimeout(collectImages, 1000); });
 });
 
+
+// ── BRAND MODAL ──
+document.addEventListener("DOMContentLoaded", function(){
+(function(){
+  var modal    = document.getElementById("brand-modal");
+  var mInner   = document.getElementById("brand-modal-inner");
+  var mClose   = document.getElementById("bm-close");
+  var mAccent  = document.getElementById("bm-accent-line");
+  var mName    = document.getElementById("bm-name");
+  var mLoc     = document.getElementById("bm-loc");
+  var mDesc    = document.getElementById("bm-desc");
+  var mBody    = document.getElementById("bm-body");
+  if(!modal) return;
+
+  var BRANDS = {
+    flow: {
+      name:   "Flow Brew &amp; Dine",
+      loc:    "DLF Avenue Saket, New Delhi",
+      accent: "#1A5276",
+      accentLight: "#7ec8e3",
+      desc:   "A 9,000 sq ft award-winning brew pub and live music destination — spanning a lush rooftop, vibrant indoor bar, and open-air outdoor section at DLF Avenue, Saket. Winner of the Times Nightlife Award 2023.",
+      cards: [
+        {
+          title: "The Experience",
+          items: [
+            "9,000 sq ft across rooftop, bar &amp; outdoor",
+            "Times Nightlife Award winner 2023",
+            "Live bands &amp; fire performances every weekend",
+            "Craft beer, curated cocktails &amp; an all-day menu"
+          ]
+        },
+        {
+          title: "Programming",
+          items: [
+            "Live music — every Fri &amp; Sat",
+            "Fire performance &amp; themed event nights",
+            "Brand activations, pop-ups &amp; buyouts",
+            "Fashion events &amp; seasonal launches"
+          ]
+        },
+        {
+          title: "The Audience",
+          items: [
+            "Urban professionals, 24–38, South Delhi",
+            "1,500+ covers on peak weekends",
+            "Avg spend ₹2,000+ per cover",
+            "40K+ Instagram followers"
+          ]
+        },
+        {
+          title: "Sponsorship Opportunity",
+          items: [
+            "On-bar brand visibility &amp; menu integration",
+            "Stage naming rights for live events",
+            "Co-branded Instagram Reels &amp; Stories",
+            "Product sampling to premium crowd"
+          ]
+        }
+      ]
+    },
+    chatter: {
+      name:   "The Chatter House",
+      loc:    "Khan Market &amp; Nehru Place, New Delhi",
+      accent: "#8B1A1A",
+      accentLight: "#e88",
+      desc:   "Delhi's most beloved pub institution since 2013. Two iconic locations in Khan Market and Nehru Place — known for signature brick arches, craft beer taps, and a fiercely loyal crowd that has been returning for over a decade.",
+      cards: [
+        {
+          title: "The Experience",
+          items: [
+            "Two prime locations — Khan Market &amp; Nehru Place",
+            "Iconic brick arch interiors &amp; chandelier halls",
+            "Craft beer on tap &amp; extensive spirits menu",
+            "Delhi's go-to for sport, music &amp; community"
+          ]
+        },
+        {
+          title: "Programming",
+          items: [
+            "Live music — Thu, Fri &amp; Sat",
+            "Weekly pub quiz nights &amp; karaoke",
+            "UCL, Premier League &amp; ICC screenings",
+            "Fashion pop-ups &amp; themed event nights"
+          ]
+        },
+        {
+          title: "The Audience",
+          items: [
+            "Mixed 24–42 — professionals &amp; sports fans",
+            "Two locations covering Central Delhi",
+            "Deep repeat-visit culture, weekly regulars",
+            "30K+ Instagram followers combined"
+          ]
+        },
+        {
+          title: "Sponsorship Opportunity",
+          items: [
+            "Bar-back display &amp; POS branding",
+            "Live sport night co-sponsorship",
+            "Quiz night &amp; karaoke title sponsor",
+            "Influencer evenings &amp; content creation"
+          ]
+        }
+      ]
+    },
+    popes: {
+      name:   "Popes' Southwest Cantina",
+      loc:    "M3M Broadway, Sector 71, Gurugram",
+      accent: "#7D3C1A",
+      accentLight: "#d4a574",
+      desc:   "Gurugram's most anticipated opening of 2025 — a Mexican cantina with Southwest soul. Rustic roadhouse vibes, handcrafted décor, warm Edison lighting, NY-style pizza, slow-cooked meats, and a bar that champions tequila and mezcal.",
+      cards: [
+        {
+          title: "The Experience",
+          items: [
+            "M3M Broadway, Sector 71 — prime Gurugram location",
+            "Rustic cantina décor with Edison bulb ceiling",
+            "NY-style pizza, tacos &amp; slow-cooked meats",
+            "Tequila &amp; mezcal bar — Gurugram's first of its kind"
+          ]
+        },
+        {
+          title: "Programming",
+          items: [
+            "Live music — bands, DJs &amp; acoustic acts",
+            "Tequila tastings &amp; cocktail masterclasses",
+            "Brand launch events &amp; private dining buyouts",
+            "Sunday brunches &amp; curated dining experiences"
+          ]
+        },
+        {
+          title: "The Audience",
+          items: [
+            "Gurugram's premium dining &amp; nightlife crowd",
+            "Corporate professionals from Cyber City",
+            "Avg cover ₹2,500+ — high-spend segment",
+            "Strong weekend footfall from Day 1"
+          ]
+        },
+        {
+          title: "Sponsorship Opportunity",
+          items: [
+            "Signature cocktail naming &amp; menu integration",
+            "Tequila night co-sponsorship &amp; branding",
+            "Instagram content &amp; reel campaigns",
+            "Exclusive product launch events"
+          ]
+        }
+      ]
+    }
+  };
+
+  function openModal(brand){
+    var d = BRANDS[brand];
+    if(!d) return;
+    mAccent.style.background = d.accent;
+    mName.innerHTML = d.name;
+    mLoc.style.color = d.accentLight;
+    mLoc.textContent = d.loc;
+    mDesc.textContent = d.desc.replace(/&amp;/g,"&");
+    mBody.innerHTML = d.cards.map(function(c){
+      return '<div class="bm-card">'
+        + '<div class="bm-card-title" style="color:'+d.accentLight+'">'+c.title+'</div>'
+        + '<ul class="bm-list">'
+        + c.items.map(function(item){
+            return '<li><span>→</span>'+item+'</li>';
+          }).join('')
+        + '</ul></div>';
+    }).join('');
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal(){
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  // Click on brand cards
+  document.addEventListener("click", function(e){
+    var card = e.target.closest("[data-brand]");
+    if(card){
+      openModal(card.getAttribute("data-brand"));
+      return;
+    }
+  });
+
+  mClose.addEventListener("click", closeModal);
+  modal.addEventListener("click", function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && modal.classList.contains("open")) closeModal();
+  });
+})();
+});
+
 </script>
 
 <!-- LIGHTBOX -->
@@ -1242,6 +1619,20 @@ document.addEventListener("DOMContentLoaded", function(){
   <img id="lb-img" src="" alt="">
   <button id="lb-next" aria-label="Next">&#8250;</button>
   <div id="lb-counter"></div>
+</div>
+
+<!-- BRAND MODAL -->
+<div id="brand-modal" role="dialog" aria-modal="true">
+  <div id="brand-modal-inner">
+    <button id="bm-close" aria-label="Close">&#x2715;</button>
+    <div id="bm-header">
+      <div id="bm-accent-line"></div>
+      <div id="bm-name"></div>
+      <div id="bm-loc"></div>
+      <div id="bm-desc"></div>
+    </div>
+    <div id="bm-body"></div>
+  </div>
 </div>
 </body>
 </html>
