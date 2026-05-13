@@ -257,6 +257,68 @@ section{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:col
   .del-grid{grid-template-columns:1fr!important}
   .cvr-title{font-size:26px!important}
 }
+
+/* ── LIGHTBOX ── */
+#lightbox{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,0);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease, background .3s ease;
+}
+#lightbox.open{
+  opacity:1;pointer-events:all;
+  background:rgba(0,0,0,0.92);
+}
+#lightbox img{
+  max-width:92vw;max-height:88vh;
+  object-fit:contain;
+  border-radius:8px;
+  transform:scale(0.88);
+  transition:transform .35s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 24px 80px rgba(0,0,0,0.6);
+}
+#lightbox.open img{transform:scale(1)}
+#lb-close{
+  position:fixed;top:20px;right:24px;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+  color:#fff;font-size:20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:10000;
+  backdrop-filter:blur(8px);
+}
+#lb-close:hover{background:rgba(255,255,255,0.2)}
+#lb-prev,#lb-next{
+  position:fixed;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+  color:#fff;font-size:22px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:10000;
+  backdrop-filter:blur(8px);
+  -webkit-tap-highlight-color:transparent;
+}
+#lb-prev{left:16px}
+#lb-next{right:16px}
+#lb-prev:hover,#lb-next:hover{background:rgba(255,255,255,0.22)}
+#lb-counter{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  font-size:12px;letter-spacing:.15em;color:rgba(255,255,255,0.5);
+  z-index:10000;font-family:var(--sans);
+}
+/* Make all gallery cells show pointer + subtle hover */
+.fg-cell,.ch-cell,.pg-cell{cursor:pointer}
+.fg-cell::after,.ch-cell::after,.pg-cell::after{
+  content:"";position:absolute;inset:0;
+  background:rgba(201,168,76,0);
+  transition:background .25s;pointer-events:none;
+}
+.fg-cell:hover::after,.ch-cell:hover::after,.pg-cell:hover::after{
+  background:rgba(201,168,76,0.08);
+}
+/* Zoom icon on hover */
+.fg-cell:hover img,.ch-cell:hover img,.pg-cell:hover img{transform:scale(1.04)}
 </style>
 </head>
 <body>
@@ -1087,6 +1149,99 @@ update();
 })();
 
 
+
+// ── LIGHTBOX ──
+document.addEventListener("DOMContentLoaded", function(){
+  var lb      = document.getElementById("lightbox");
+  var lbImg   = document.getElementById("lb-img");
+  var lbClose = document.getElementById("lb-close");
+  var lbPrev  = document.getElementById("lb-prev");
+  var lbNext  = document.getElementById("lb-next");
+  var lbCount = document.getElementById("lb-counter");
+
+  // Bail out safely if any element is missing
+  if(!lb || !lbImg || !lbClose || !lbPrev || !lbNext || !lbCount) return;
+
+  var images  = [];
+  var current = 0;
+
+  function collectImages(){
+    images = [];
+    document.querySelectorAll(".fg-cell, .ch-cell, .pg-cell").forEach(function(cell){
+      var img = cell.querySelector("img");
+      if(img && img.src && img.src.length > 50){
+        images.push({src: img.src, alt: img.alt || ""});
+        cell.setAttribute("data-lb-index", images.length - 1);
+        cell.setAttribute("role", "button");
+        cell.setAttribute("tabindex", "0");
+        cell.style.cursor = "pointer";
+      }
+    });
+  }
+
+  function openLb(idx){
+    if(!images.length) return;
+    current = ((idx % images.length) + images.length) % images.length;
+    lbImg.src = images[current].src;
+    lbImg.alt = images[current].alt;
+    lbCount.textContent = (current + 1) + " • " + images.length;
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLb(){
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+    setTimeout(function(){ lbImg.src = ""; }, 350);
+  }
+
+  function nextImg(){ openLb(current + 1); }
+  function prevImg(){ openLb(current - 1); }
+
+  // Cell clicks (delegated)
+  document.addEventListener("click", function(e){
+    var cell = e.target.closest(".fg-cell, .ch-cell, .pg-cell");
+    if(cell){
+      var idx = parseInt(cell.getAttribute("data-lb-index"), 10);
+      if(!isNaN(idx)) openLb(idx);
+    }
+  });
+
+  // Controls
+  lbClose.addEventListener("click", closeLb);
+  lbPrev.addEventListener("click",  function(e){ e.stopPropagation(); prevImg(); });
+  lbNext.addEventListener("click",  function(e){ e.stopPropagation(); nextImg(); });
+  lb.addEventListener("click",      function(e){ if(e.target === lb) closeLb(); });
+
+  // Keyboard
+  document.addEventListener("keydown", function(e){
+    if(!lb.classList.contains("open")) return;
+    if(e.key === "Escape")     closeLb();
+    if(e.key === "ArrowRight") nextImg();
+    if(e.key === "ArrowLeft")  prevImg();
+  });
+
+  // Swipe
+  var txStart = 0;
+  lb.addEventListener("touchstart", function(e){ txStart = e.changedTouches[0].screenX; }, {passive:true});
+  lb.addEventListener("touchend",   function(e){
+    var dx = e.changedTouches[0].screenX - txStart;
+    if(Math.abs(dx) > 50){ dx < 0 ? nextImg() : prevImg(); }
+  });
+
+  // Collect images after everything loads
+  window.addEventListener("load", function(){ setTimeout(collectImages, 1000); });
+});
+
 </script>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button id="lb-close" aria-label="Close">&#x2715;</button>
+  <button id="lb-prev" aria-label="Previous">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button id="lb-next" aria-label="Next">&#8250;</button>
+  <div id="lb-counter"></div>
+</div>
 </body>
 </html>
